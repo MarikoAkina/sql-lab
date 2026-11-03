@@ -110,7 +110,7 @@ USE finance_lab;
 
 ## 尚未实现
 
-视图、索引管理、外键、事务、复合约束、CHECK、触发器、权限、存储过程、CTE、UNION、窗口函数、关联子查询、RIGHT / CROSS JOIN、派生表、INSERT SELECT、REPLACE INTO、UPDATE / DELETE 的 ORDER BY / LIMIT、字符集和存储引擎选项、系统表，以及 MySQL 客户端命令。
+视图、索引管理、外键、事务、复合约束、触发器、权限、存储过程、CTE、UNION、窗口函数、关联子查询、RIGHT / CROSS JOIN、派生表、INSERT SELECT、REPLACE INTO、UPDATE / DELETE 的 ORDER BY / LIMIT、字符集和存储引擎选项、系统表，以及 MySQL 客户端命令。
 
 ## 容量与执行上限
 
@@ -139,3 +139,7 @@ USE finance_lab;
 - [MySQL 8.4 条件表达式与函数](https://docs.oracle.com/cd/E17952_01/mysql-8.4-en/flow-control-functions.html)。
 - [MySQL 8.4 字符串函数](https://docs.oracle.com/cd/E17952_01/mysql-8.4-en/string-functions.html)。
 - [MySQL 8.4 日期与时间函数](https://docs.oracle.com/cd/E17952_01/mysql-8.4-en/date-and-time-functions.html)。
+
+## 1.2.0 字段选项
+
+支持列级与表级 CHECK、命名约束、ENFORCED / NOT ENFORCED、ALTER ADD / DROP CHECK、COMMENT 及 SHOW CREATE TABLE。CHECK 在写入时实际执行，失败报 3819 并整条回退；详细表达式、限制和示例见 [字段选项指南](field-options.md)。同一字段内多个 CHECK、ALTER CHECK 状态切换、生成列和自动时间戳尚未支持。

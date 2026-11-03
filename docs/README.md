@@ -12,6 +12,7 @@
 | 每题的示例、预期输出与 28–45 题内容 | [练习与手机改进](learning-0.4.md) |
 | 使用原生自动提示、表与别名字段补全 | [SQL 智能补全](sql-completion.md) |
 | 选择 CHAR、VARCHAR、整数和金额字段 | [字段类型与建表](column-types.md) |
+| 设置金额范围、跨列条件与字段注释 | [CHECK 与字段选项](field-options.md) |
 | 确认某条 SQL 能否执行 | [SQL 支持范围与兼容限制](sql-compatibility.md) |
 | 下载源码、部署网页或构建安装包 | [开发、构建与部署](development.md) |
 | 了解测试证据和未完成的验收 | [测试与验收](testing.md) |

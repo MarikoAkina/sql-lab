@@ -130,6 +130,12 @@ test('新增字段经实际 Worker 建表写入、树形结构显示并刷新恢
  assert.ok(document.querySelector('.schema-sidebar').textContent.includes('BIGINT UNSIGNED'));assert.ok(document.querySelector('.schema-sidebar').textContent.includes('CHAR(4)'));assert.ok(document.querySelector('.schema-sidebar').textContent.includes('TINYINT(1)'));
  await tick(400);await unmount();await mount();await waitFor(()=>document.querySelector('.cm-editor'));await inputSQL("INSERT INTO people(code,name) VALUES('B','李同学'); SELECT MAX(id),COUNT(*) FROM people;");await click(byText('执行全部'));await waitFor(()=>document.querySelector('.result-grid')?.textContent.includes('9007199254740994'));assert.ok(document.querySelector('.result-grid').textContent.includes('2'));
 });
+test('CHECK 经实际 Worker 拒绝写入，日志和刷新后约束保持有效',async()=>{
+ await inputSQL("CREATE DATABASE check_lab; USE check_lab; CREATE TABLE fees(id INT PRIMARY KEY AUTO_INCREMENT, amount DECIMAL(8,2) CHECK(amount>=0) COMMENT '费用'); INSERT INTO fees(amount) VALUES(10); SELECT amount FROM fees;");await click(byText('执行全部'));await waitFor(()=>document.querySelector('.result-grid')?.textContent.includes('10'));
+ await inputSQL('INSERT INTO fees(amount) VALUES(20),(-1);');await click(byText('执行全部'));await waitFor(()=>document.querySelector('.app')?.textContent.includes('3819'));assert.ok(document.querySelector('.app').textContent.includes('CHECK'));
+ await tick(400);await unmount();await mount();await waitFor(()=>document.querySelector('.cm-editor'));await inputSQL('INSERT INTO fees(amount) VALUES(-1);');await click(byText('执行全部'));await waitFor(()=>document.querySelector('.app')?.textContent.includes('3819'));
+ await inputSQL('SELECT COUNT(*),SUM(amount) FROM fees;');await click(byText('执行全部'));await waitFor(()=>document.querySelector('.result-grid')?.textContent.includes('10'));assert.equal(document.querySelectorAll('.result-grid tbody tr').length,1);assert.ok(document.querySelector('.result-grid').textContent.includes('1'));
+});
 test.after(async()=>{await unmount();dom.window.close();});
 
 let passed=0;for(const t of cases){const start=performance.now();try{await t.fn();console.log('PASS',t.name,Math.round(performance.now()-start)+'ms');passed++;}catch(e){console.error('FAIL',t.name,e.stack);}}

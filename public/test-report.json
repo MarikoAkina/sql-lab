@@ -1,10 +1,10 @@
 {
   "product": "SQL LAB · MySQL 基础学习模拟器",
-  "version": "1.1.0",
-  "testedAt": "2026-11-02T09:36:15.913976+08:00",
+  "version": "1.2.0",
+  "testedAt": "2026-11-03T11:29:43.416970+08:00",
   "summary": {
-    "tests": 220,
-    "pass": 220,
+    "tests": 250,
+    "pass": 250,
     "fail": 0
   },
   "suites": [
@@ -270,6 +270,30 @@
         "BIGINT 精确自增、更新、溢出与 TRUNCATE",
         "ALTER 转换失败回退、SQL/JSON/IndexedDB 往返与损坏备份",
         "类型别名词法适配、错误位置、未支持类型提示"
+      ]
+    },
+    {
+      "suite": "CHECK 与字段选项",
+      "tests": 29,
+      "pass": 29,
+      "fail": 0,
+      "cases": [
+        "CHECK 真/假/NULL 三值逻辑",
+        "跨字段金额、整数精度与确定性函数",
+        "命名、执行状态、ADD / DROP CHECK",
+        "COMMENT 与 SHOW CREATE",
+        "多行写入及 ALTER 原子回退",
+        "SQL / JSON / IndexedDB 往返",
+        "同名、无效引用、生成列及未支持选项拒绝"
+      ]
+    },
+    {
+      "suite": "CHECK 实际 Worker / DOM / 刷新恢复",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "cases": [
+        "界面执行、3819 显示、整批回退、刷新后再次校验"
       ]
     }
   ],
